@@ -85,15 +85,14 @@ const InstallForm = () => {
   const passwordErrors = useStore(form.store, state => state.fieldMeta.password?.errors)
 
   useEffect(() => {
-    let first_time = localStorage.getItem('first_time') !== null
+    let first_time = localStorage.getItem('first_time') == null
 
-    if (!first_time) {
+    if (first_time) {
       localStorage.setItem('first_time', 'true')
       first_time = true
     }
     else {
       localStorage.setItem('first_time', 'false')
-      first_time = false
     }
 
     fetchSetupStatus().then((res: SetupStatusResponse) => {
